@@ -76,7 +76,7 @@ def main() -> None:
         regex_stopword = r"\b" + stop_word + r"\b"
         df["F_CONTENT"] = df["F_CONTENT"].str.replace(regex_stopword, '')
 
-    print(df["F_CONTENT"])
+    print(df.head())
 
 if __name__ == "__main__":
     main()
