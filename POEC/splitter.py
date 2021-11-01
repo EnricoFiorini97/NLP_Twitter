@@ -1,3 +1,5 @@
+#Tool for dataset creation and splitting
+
 import sys
 import os
 
