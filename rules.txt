@@ -1,0 +1,38 @@
+Rules for deterministic category identification:
+
+	*entities are marked as [entity].
+
+
+	- Artworks: 
+		if words like: (art, work, artwork, cup, photo, painter, photographer,[person name], book, opera, ceramic, portrait, paint), then the tweet may be categorized as 
+		a tweet about an artwork.
+
+	
+	- Festivities:
+		if words like: (happy, birthday, [festivity name], happy birthday, celebrating, celebrate, wish, fun, have fun), the the tweet may be categorized as a festivity
+		celebration tweet.
+
+	
+	- Promotions:
+		if words like: (tickets, check, check out, week, exhibition, explore, [date (current year)], open, opens, don't miss), the the tweet may be categorized 
+		as a promotion tweet.
+
+
+	- History: 
+		if words like: (history, [date < 2015], [festivity name], [historical characted], war, [population name], past, years, century), the the tweet may be categorized 
+		as an historical topic  tweet.
+
+
+	-On this day:
+		if words like: (today, onthisday, [date], tonight, born, die, happen, happens today, happened today), the the tweet may be categorized as a recurrence
+		celebration tweet.
+
+
+	-Vip cit:
+		if words like: (said, phrase, [VIP name], citation, famous, [full quoted text]), the the tweet may be categorized as a VIP citation tweet.
+
+
+	
+	
+	
+		    

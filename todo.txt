@@ -7,7 +7,7 @@
 	3] Deterministic identification rules for each tweet category				|	    Work in Progress.
 	4] Switch paradigm from 1 classificator -> N status, to N boolean classificators	|           Done. *
 	5] Extract most frequent words for each category					|           Done.
-	6] Accuracy scores table								|	    Work in Progress.
+	6] Accuracy scores table								|	    Done.
 	7] New Models										|           Done.
 
 

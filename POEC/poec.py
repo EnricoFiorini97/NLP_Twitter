@@ -38,22 +38,20 @@ def main() -> None:
     categories.remove(np.nan)
 
     data = {}
-    cat_dict = {i:category for i, category in enumerate(categories)}
 
     for category in categories:
         data[category] = 0
 
-    for cat in categories:
-        data[cat] += 1
-
+    for cat in df["CATEGORY"]:
+        try:
+            data[cat] += 1
+        except Exception:
+            pass
     #Getting dataset composition
     names = list(data.keys())
     values = list(data.values())
     
     #Plotting dataset composition
-
-    print(names)
-    
     plt.bar(names[0], values[0], color="blue", label=names[0])
     plt.bar(names[1], values[1], color="red", label=names[1])
     plt.bar(names[2], values[2], color="black", label=names[2])
@@ -407,6 +405,7 @@ def main() -> None:
     plt.legend()
     plt.grid()
     plt.show()
+
  
 if __name__ == "__main__":
     main()
