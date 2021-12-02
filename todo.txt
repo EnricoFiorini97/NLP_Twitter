@@ -1,0 +1,14 @@
+						--- TASK TO BE COMPLETED WITHIN 05/12/2021 ---
+
+					DESCRIPTION								STATUS
+
+	1] Xgboost integration 									|	    Work in Progress.
+	2] Improve dataset dimension								|	    Work in Progress.	
+	3] Deterministic identification rules for each tweet category				|	    Work in Progress.
+	4] Switch paradigm from 1 classificator -> N status, to N boolean classificators	|           Done. *
+	5] Extract most frequent words for each category					|           Done.
+	6] Accuracy scores table								|	    Work in Progress.
+	7] New Models										|           Done.
+
+
+	*Unable to switch from an N status classificator, from N boolean classificators (BERT). 
