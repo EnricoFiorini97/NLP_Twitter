@@ -1,0 +1,10 @@
+Most correlated unigrams:
+. staff
+. celebrate
+. birthday
+. anniversary
+. happy  
+
+Most correlated bigrams:
+. happy birthday
+. happy anniversary

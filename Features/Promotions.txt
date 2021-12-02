@@ -1,0 +1,10 @@
+Most correlated unigrams:
+. ticket
+. experience
+. miss
+. onthisday  
+. check 
+
+Most correlated bigrams:
+. create work
+. open onthisday

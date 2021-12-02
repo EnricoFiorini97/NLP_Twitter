@@ -1,0 +1,10 @@
+Most correlated unigrams:
+. japan
+. august
+. cup
+. vase
+. photo  
+
+Most correlated bigrams:
+. work view
+. august plan

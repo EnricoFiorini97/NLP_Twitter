@@ -155,6 +155,10 @@ def main() -> None:
         print("  . Most correlated unigrams:\n. {}".format('\n. '.join(unigrams[-5:])))
         print("  . Most correlated bigrams:\n. {}".format('\n. '.join(bigrams[-2:])))
 
+        '''with open(f"../Features/{category}.txt", 'w') as f:
+            f.write("  . Most correlated unigrams:\n. {}".format('\n. '.join(unigrams[-5:])))
+            f.write("  . Most correlated bigrams:\n. {}".format('\n. '.join(bigrams[-2:])))
+
     #WARNING: these pickles are intended to be printed out only in tuning and test phase, they will be removed later.
 
     #X_train
@@ -164,7 +168,7 @@ def main() -> None:
     # X_test    
     with open('Pickles/X_test.pickle', 'wb') as output:
         pickle.dump(X_test, output)
-        
+
     # y_train
     with open('Pickles/y_train.pickle', 'wb') as output:
         pickle.dump(y_train, output)
@@ -195,7 +199,7 @@ def main() -> None:
         
     # TF-IDF object
     with open('Pickles/tfidf.pickle', 'wb') as output:
-        pickle.dump(tfidf, output)
+        pickle.dump(tfidf, output)'''
 
         
     # Dataframe

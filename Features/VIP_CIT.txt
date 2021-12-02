@@ -1,0 +1,10 @@
+Most correlated unigrams:
+. series
+. artquote
+. sketch
+. architect
+. photographer  
+
+Most correlated bigrams:
+. find inspire
+. american art
