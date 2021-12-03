@@ -21,21 +21,20 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.model_selection import ShuffleSplit
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.preprocessing import LabelEncoder
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import GradientBoostingClassifier
+
 
 
 def main() -> None:
     #Loading dataset
-    df = pd.read_csv("dataset.csv", delimiter=',')
+    df = pd.read_csv("dataset_2.csv", delimiter=',')
 
     #Building up data for plotting
     categories = list(df["CATEGORY"].unique())
-    categories.remove(np.nan)
+    try:
+        categories.remove(np.nan)
+    except: pass
 
     data = {}
 
@@ -57,12 +56,14 @@ def main() -> None:
     plt.bar(names[2], values[2], color="black", label=names[2])
     plt.bar(names[3], values[3], color="green", label=names[3])
     plt.bar(names[4], values[4], color="yellow", label=names[4])
+    plt.bar(names[5], values[5], color="brown", label=names[5])
     plt.xlabel("Categories")
     plt.ylabel("Size")
     plt.title("Dataset composition")
     plt.legend()
     plt.grid()
     plt.show()
+
 
     models = {}
 
@@ -155,73 +156,73 @@ def main() -> None:
 
         '''with open(f"../Features/{category}.txt", 'w') as f:
             f.write("  . Most correlated unigrams:\n. {}".format('\n. '.join(unigrams[-5:])))
-            f.write("  . Most correlated bigrams:\n. {}".format('\n. '.join(bigrams[-2:])))
+            f.write("  . Most correlated bigrams:\n. {}".format('\n. '.join(bigrams[-2:])))'''
 
     #WARNING: these pickles are intended to be printed out only in tuning and test phase, they will be removed later.
 
     #X_train
-    with open('Pickles/X_train.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/X_train.pickle', 'wb') as output:
         pickle.dump(X_train, output)
 
     # X_test    
-    with open('Pickles/X_test.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/X_test.pickle', 'wb') as output:
         pickle.dump(X_test, output)
 
     # y_train
-    with open('Pickles/y_train.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/y_train.pickle', 'wb') as output:
         pickle.dump(y_train, output)
         
     # y_test
-    with open('Pickles/y_test.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/y_test.pickle', 'wb') as output:
         pickle.dump(y_test, output)
         
     # df
-    with open('Pickles/df.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/df.pickle', 'wb') as output:
         pickle.dump(df, output)
         
     # features_train
-    with open('Pickles/features_train.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/features_train.pickle', 'wb') as output:
         pickle.dump(features_train, output)
 
     # labels_train
-    with open('Pickles/labels_train.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/labels_train.pickle', 'wb') as output:
         pickle.dump(labels_train, output)
 
     # features_test
-    with open('Pickles/features_test.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/features_test.pickle', 'wb') as output:
         pickle.dump(features_test, output)
 
     # labels_test
-    with open('Pickles/labels_test.pickle', 'wb') as output:
+    with open('expanded_ds_pickles/labels_test.pickle', 'wb') as output:
         pickle.dump(labels_test, output)
         
     # TF-IDF object
-    with open('Pickles/tfidf.pickle', 'wb') as output:
-        pickle.dump(tfidf, output)'''
+    with open('expanded_ds_pickles/tfidf.pickle', 'wb') as output:
+        pickle.dump(tfidf, output)
 
         
     # Dataframe
-    path_df = "Pickles/df.pickle"
+    path_df = "expanded_ds_pickles/df.pickle"
     with open(path_df, 'rb') as data:
         df = pickle.load(data)
 
     # features_train
-    path_features_train = "Pickles/features_train.pickle"
+    path_features_train = "expanded_ds_pickles/features_train.pickle"
     with open(path_features_train, 'rb') as data:
         features_train = pickle.load(data)
 
     # labels_train
-    path_labels_train = "Pickles/labels_train.pickle"
+    path_labels_train = "expanded_ds_pickles/labels_train.pickle"
     with open(path_labels_train, 'rb') as data:
         labels_train = pickle.load(data)
 
     # features_test
-    path_features_test = "Pickles/features_test.pickle"
+    path_features_test = "expanded_ds_pickles/features_test.pickle"
     with open(path_features_test, 'rb') as data:
         features_test = pickle.load(data)
 
     # labels_test
-    path_labels_test = "Pickles/labels_test.pickle"
+    path_labels_test = "expanded_ds_pickles/labels_test.pickle"
     with open(path_labels_test, 'rb') as data:
         labels_test = pickle.load(data)
 
