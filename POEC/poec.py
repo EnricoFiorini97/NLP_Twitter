@@ -264,6 +264,7 @@ def main() -> None:
     print(grid_search.best_score_)
     models["GridSearchCV"] = grid_search.best_score_
 
+    '''
     #SVC
     svc_0 =svm.SVC(random_state=8)
     # C
@@ -307,7 +308,7 @@ def main() -> None:
     print("The mean accuracy of a SCV model  is:")
     print(random_search.best_score_)
     models["SupportVectorMachine"] = random_search.best_score_
-
+    '''
 
     knnc_0 =KNeighborsClassifier()
     # Create the parameter grid 
@@ -399,7 +400,7 @@ def main() -> None:
     plt.bar(model_names[1], model_scores[1], color="red", label=model_names[1])
     plt.bar(model_names[2], model_scores[2], color="black", label=model_names[2])
     plt.bar(model_names[3], model_scores[3], color="green", label=model_names[3])
-    plt.bar(model_names[4], model_scores[4], color="yellow", label=model_names[4])
+    #plt.bar(model_names[4], model_scores[4], color="yellow", label=model_names[4])
     plt.xlabel("Model name")
     plt.ylabel("Accuracy score")
     plt.title("Various adopted models scores")
