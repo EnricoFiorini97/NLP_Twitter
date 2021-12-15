@@ -113,7 +113,6 @@ def main() -> None:
     df["F_CAT_CODE"] = [cat.split("-")[0] for cat in df["F_NAME"]]
     df = df.replace({"F_CAT_CODE" : category_codes})
 
-    """
     X_train, X_test, y_train, y_test = train_test_split(df["F_CONTENT"], 
                                                             df["F_CAT_CODE"], 
                                                             test_size=0.15, 
@@ -225,7 +224,6 @@ def main() -> None:
     with open(path_labels_test, 'rb') as data:
         labels_test = pickle.load(data)
 
-    '''
     #GRID SEARCH CV
     # Create the parameter grid based on the results of random search 
     bootstrap = [False]
@@ -356,9 +354,8 @@ def main() -> None:
     plt.title("Various adopted models scores")
     plt.legend()
     plt.grid()
-    plt.show()'''
+    plt.show()
 
-    """
     cv = CountVectorizer(max_features=5000, encoding="utf-8",  
       ngram_range = (1,3),  
       token_pattern = "[A-Za-z_][A-Za-z\d_]*")
