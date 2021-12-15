@@ -4,25 +4,24 @@ import pickle
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
 import re
 import xgboost as xgb
 
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection import chi2
 from sklearn.ensemble import RandomForestClassifier
-from pprint import pprint
-from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import accuracy_score, mean_squared_error
 from sklearn.model_selection import ShuffleSplit
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.feature_extraction.text import CountVectorizer
 
 
 
@@ -57,6 +56,7 @@ def main() -> None:
     plt.bar(names[3], values[3], color="green", label=names[3])
     plt.bar(names[4], values[4], color="yellow", label=names[4])
     plt.bar(names[5], values[5], color="brown", label=names[5])
+    plt.bar(names[6], values[6], color="orange", label=names[5])
     plt.xlabel("Categories")
     plt.ylabel("Size")
     plt.title("Dataset composition")
@@ -113,8 +113,7 @@ def main() -> None:
     df["F_CAT_CODE"] = [cat.split("-")[0] for cat in df["F_NAME"]]
     df = df.replace({"F_CAT_CODE" : category_codes})
 
-    print(categories)
-    
+    """
     X_train, X_test, y_train, y_test = train_test_split(df["F_CONTENT"], 
                                                             df["F_CAT_CODE"], 
                                                             test_size=0.15, 
@@ -226,7 +225,7 @@ def main() -> None:
     with open(path_labels_test, 'rb') as data:
         labels_test = pickle.load(data)
 
-    
+    '''
     #GRID SEARCH CV
     # Create the parameter grid based on the results of random search 
     bootstrap = [False]
@@ -260,57 +259,10 @@ def main() -> None:
 
     # Fit the grid search to the data
     grid_search.fit(features_train, labels_train)
-    print("The mean accuracy of a GridSearchCV model is:")
+    print("The mean accuracy of a RandomForestClassifier model is:")
     print(grid_search.best_score_)
-    models["GridSearchCV"] = grid_search.best_score_
+    models["RandomForestClassifier"] = grid_search.best_score_
 
-    '''
-    #SVC
-    svc_0 =svm.SVC(random_state=8)
-    # C
-    C = [.0001, .001, .01]
-
-    # gamma
-    gamma = [.0001, .001, .01, .1, 1, 10, 100]
-
-    # degree
-    degree = [1, 2, 3, 4, 5]
-
-    # kernel
-    kernel = ['linear', 'rbf', 'poly']
-
-    # probability
-    probability = [True]
-
-    # Create the random grid
-    random_grid = {'C': C,
-                'kernel': kernel,
-                'gamma': gamma,
-                'degree': degree,
-                'probability': probability
-                }
-
-    # First create the base model to tune
-    svc = svm.SVC(random_state=8)
-
-    # Definition of the random search
-    random_search = RandomizedSearchCV(estimator=svc,
-                                    param_distributions=random_grid,
-                                    n_iter=50,
-                                    scoring='accuracy',
-                                    cv=3, 
-                                    verbose=1, 
-                                    random_state=8)
-
-    # Fit the random search model
-    random_search.fit(features_train, labels_train)
-
-    print("The mean accuracy of a SCV model  is:")
-    print(random_search.best_score_)
-    models["SupportVectorMachine"] = random_search.best_score_
-    '''
-
-    knnc_0 =KNeighborsClassifier()
     # Create the parameter grid 
     n_neighbors = [int(x) for x in np.linspace(start = 1, stop = 500, num = 100)]
 
@@ -334,7 +286,6 @@ def main() -> None:
     print("The mean accuracy of a KNN model is:")
     print(grid_search.best_score_)
     models["KNeighborsClassifier"] = grid_search.best_score_
-
 
 
     #MULTINOMIAL NAIVE BAYES
@@ -387,7 +338,6 @@ def main() -> None:
 
     best_lrc = grid_search.best_estimator_
     best_lrc.fit(features_train, labels_train)
-    lrc_pred = best_lrc.predict(features_test)
 
     # Training accuracy
     print("The training accuracy of a LR model is: ")
@@ -406,8 +356,33 @@ def main() -> None:
     plt.title("Various adopted models scores")
     plt.legend()
     plt.grid()
-    plt.show()
+    plt.show()'''
 
- 
+    """
+    cv = CountVectorizer(max_features=5000, encoding="utf-8",  
+      ngram_range = (1,3),  
+      token_pattern = "[A-Za-z_][A-Za-z\d_]*")
+
+    X = cv.fit_transform(df["F_CONTENT"]).toarray()
+    y = df['F_CAT_CODE']
+
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, 
+      test_size=0.33, 
+      random_state=0)
+
+    model =xgb.XGBClassifier()
+    model.fit(X_train, y_train)
+
+    # make predictions for test data
+
+    y_pred = model.predict(X_test)
+    predictions = [round(value) for value in y_pred]
+
+    # evaluate predictions
+
+    accuracy = accuracy_score(y_test, predictions)
+    print("Accuracy: %.2f%%" % (accuracy * 100.0))
+
 if __name__ == "__main__":
     main()
