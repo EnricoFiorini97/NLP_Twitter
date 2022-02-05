@@ -45,6 +45,7 @@ def main() -> None:
             data[cat] += 1
         except Exception:
             pass
+        
     #Getting dataset composition
     names = list(data.keys())
     values = list(data.values())
@@ -365,7 +366,7 @@ def main() -> None:
 
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, 
-      test_size=0.33, 
+      test_size=0.20, 
       random_state=0)
 
     model =xgb.XGBClassifier()
